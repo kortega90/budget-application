@@ -1,8 +1,8 @@
 
 <app-cabecero
-  [presupuestoTotal]="getPresupuestoTotal()"
-  [ingresoTotal]="getIngresoTotal()"
-  [egresoTotal]="getEgresoTotal()"
+  [presupuestoTotal]="presupuestoTotal"
+  [ingresoTotal]="ingresoTotal"
+  [egresoTotal]="this.egresoTotal"
   [porcentajeTotal]="getPorcentajeTotal()"
 ></app-cabecero>
 
@@ -14,7 +14,7 @@
       <app-ingreso></app-ingreso>
       
       <app-egreso
-        [ingresoTotal]="getIngresoTotal()"
+        [ingresoTotal]="ingresoTotal"
       ></app-egreso>
       
   </div>
