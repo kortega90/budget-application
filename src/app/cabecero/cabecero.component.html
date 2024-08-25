@@ -5,13 +5,13 @@
         </div>
         
         <div class="presupuesto_valor">
-            {{presupuestoTotal | currency:'MNX':'$':'1.2-2'}}</div>
+            {{presupuestoTotal | currency:'BRL':'R$':'1.2-2'}}</div>
         
         <div class="presupuesto_ingreso limpiarEstilos">
             <div class="presupuesto_ingreso--texto">Ingresos</div>
             <div class="right">
                 <div class="presupuesto_ingreso--valor">
-                    {{ingresoTotal | currency:'MNX':'$':'1.2-2'}}</div>
+                    {{ingresoTotal | currency:'BRL':'R$':'1.2-2'}}</div>
                 <div class="presupuesto_ingreso--porcentaje">&nbsp;</div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="presupuesto_egreso--text">Egresos</div>
             <div class="right limpiarEstilos">
                 <div class="presupuesto_egreso--valor">
-                    - {{egresoTotal | currency:'MNX':'$':'1.2-2'}}</div>
+                    - {{egresoTotal | currency:'BRL':'R$':'1.2-2'}}</div>
                 <div class="presupuesto_egreso--porcentaje">
                     {{porcentajeTotal | percent}}</div>
             </div>
