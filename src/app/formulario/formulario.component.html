@@ -1,7 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="agregarValor()">
+<form [formGroup]="form" (ngSubmit)="f.form.valid && agregarValor()" #f="ngForm">
     <div class="agregar">
       <div class="agregar_contenedor">
-        <select formControlName="tipoOperacion" class="agregar_tipo">
+        <select [ngClass]="{redfocus: form.get('tipoOperacion')?.value === 'egresoOperacion'}" formControlName="tipoOperacion" class="agregar_tipo">
           <option value="ingresoOperacion">+</option>
           <option value="egresoOperacion">-</option>
         </select>
@@ -12,6 +12,7 @@
           placeholder="Agregar Descripción"
           formControlName="descripcionInput"/>
         <input 
+        [ngClass]="{redfocus: form.get('tipoOperacion')?.value === 'egresoOperacion'}"
           type="number" 
           class="agregar_valor" 
           placeholder="Valor"
@@ -19,7 +20,7 @@
         <button 
           type="submit"
           class="agregar_btn">
-          <i class="ion-ios-checkmark-outline"></i>
+          <i [ngClass]="{red: form.get('tipoOperacion')?.value === 'egresoOperacion'}" class="ion-ios-checkmark-outline"></i>
         </button>
       </div>
     </div>

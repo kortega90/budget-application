@@ -19,7 +19,7 @@ export class FormularioComponent {
     // Inicializa o FormGroup com os controles e valores padrão
     this.form = this.fb.group({
       tipoOperacion: ['ingresoOperacion', Validators.required],
-      descripcionInput: [''],
+      descripcionInput: ['', Validators.required],
       valorInput: [0, [Validators.required, Validators.min(0)]]
     });
   }
