@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EgresoServicio } from '../egreso/egreso.servicio';
 import { IngresoServicio } from '../ingreso/ingreso.servicio';
 import { Ingreso } from '../ingreso/ingreso.model';
@@ -7,30 +8,43 @@ import { Egreso } from '../egreso/egreso.model';
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
-  styleUrl: './formulario.component.css'
+  styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent {
-  tipo:string="ingresoOperacion";
-  descripcionInput:string;
-  valorInput:number;
+  form: FormGroup;
 
-  constructor(private ingresoServicio: IngresoServicio,
-    private egresoServicio:EgresoServicio
-  ){}
-
-  tipoOperacion(evento: Event){
-  //tipoOperacion(evento){
-    const target = evento.target as HTMLSelectElement;
-    this.tipo = target.value;
-    //this.tipo = evento.target.value;
+  constructor(private fb: FormBuilder,
+              private ingresoServicio: IngresoServicio,
+              private egresoServicio: EgresoServicio) {
+    // Inicializa o FormGroup com os controles e valores padrão
+    this.form = this.fb.group({
+      tipoOperacion: ['ingresoOperacion', Validators.required],
+      descripcionInput: [''],
+      valorInput: [0, [Validators.required, Validators.min(0)]]
+    });
   }
 
-  agregarValor(){
-    if(this.tipo == "ingresoOperacion")
+  agregarValor() {
+    // Obtém os valores dos controles do formulário
+    const { tipoOperacion, descripcionInput, valorInput } = this.form.value;
+
+    if (valorInput <= 0) {
+      alert('O valor deve ser um número positivo.');
+      return;
+    }
+
+    // Adiciona o valor baseado no tipo de operação
+    if (tipoOperacion === 'ingresoOperacion') {
       this.ingresoServicio.ingresos.push(
-        new Ingreso(this.descripcionInput, this.valorInput));
-    else
-        this.egresoServicio.egresos.push(
-          new Egreso(this.descripcionInput, this.valorInput));
+        new Ingreso(descripcionInput, valorInput)
+      );
+    } else {
+      this.egresoServicio.egresos.push(
+        new Egreso(descripcionInput, valorInput)
+      );
+    }
+
+    // Limpa o formulário após a adição
+    this.form.reset({ tipoOperacion: 'ingresoOperacion' });
   }
 }

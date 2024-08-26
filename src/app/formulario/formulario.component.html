@@ -1,30 +1,27 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="agregarValor()">
     <div class="agregar">
-        <div class="agregar_contenedor">
-            <select (change)="tipoOperacion($event)"
-            class="agregar_tipo">
-                <option value="ingresoOperacion" selected>+</option>
-                <option value="egresoOperacion">-</option>
-            </select>
-            <input 
-                type="text" 
-                class="agregar_descripcion" 
-                placeholder="Agregar Descripción"
-                name="descripcionInput"
-                [(ngModel)]="descripcionInput"/>
-                
-            <input 
-                type="number" 
-                class="agregar_valor" 
-                placeholder="Valor"
-                name="valorInput"
-                [(ngModel)]="valorInput"/>
-            <button 
-                type="submit"
-                class="agregar_btn"
-                (click)="agregarValor()">
-                <i class="ion-ios-checkmark-outline"></i>
-            </button>
-        </div>
+      <div class="agregar_contenedor">
+        <select formControlName="tipoOperacion" class="agregar_tipo">
+          <option value="ingresoOperacion">+</option>
+          <option value="egresoOperacion">-</option>
+        </select>
+        <input 
+          [ngClass]="{redfocus: form.get('tipoOperacion')?.value === 'egresoOperacion'}"
+          type="text" 
+          class="agregar_descripcion" 
+          placeholder="Agregar Descripción"
+          formControlName="descripcionInput"/>
+        <input 
+          type="number" 
+          class="agregar_valor" 
+          placeholder="Valor"
+          formControlName="valorInput"/>
+        <button 
+          type="submit"
+          class="agregar_btn">
+          <i class="ion-ios-checkmark-outline"></i>
+        </button>
+      </div>
     </div>
   </form>
+  

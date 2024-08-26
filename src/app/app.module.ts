@@ -9,7 +9,7 @@ import { EgresoComponent } from './egreso/egreso.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { IngresoServicio } from './ingreso/ingreso.servicio';
 import { EgresoServicio } from './egreso/egreso.servicio';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [IngresoServicio, EgresoServicio],
